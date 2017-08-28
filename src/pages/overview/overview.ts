@@ -9,7 +9,7 @@ import { Platform } from 'ionic-angular';
 import { DiscoverPage } from '../discover/discover';
 import { PairingPage } from '../pairing/pairing';
 import { ProfilePage } from '../profile/profile';
-import { VendorHeatingPage } from '../vendor-heating/vendor-heating';
+import { MjpgPlayerPage } from '../mjpg-player/mjpg-player';
 import { HelpPage } from '../help/help';
 import { ClientSettingsPage } from '../client-settings/client-settings';
 import { NabtoDevice } from '../../app/device.class';
@@ -152,7 +152,7 @@ export class OverviewPage {
     console.log(`item tapped: ${JSON.stringify(device)}`);
     if (device.reachable) {
       if (device.currentUserIsPaired) {
-        this.navCtrl.push(VendorHeatingPage, {
+        this.navCtrl.push(MjpgPlayerPage, {
           device: device
         });
       } else {

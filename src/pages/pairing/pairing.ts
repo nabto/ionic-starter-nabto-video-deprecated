@@ -4,7 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DeviceUser, NabtoDevice } from '../../app/device.class';
 import { NabtoService } from '../../app/nabto.service';
 import { BookmarksService } from '../../app/bookmarks.service';
-import { VendorHeatingPage } from '../vendor-heating/vendor-heating';
+import { MjpgPlayerPage } from '../mjpg-player/mjpg-player';
 import { ProfileService } from '../../app/profile.service';
 
 @Component({
@@ -69,8 +69,8 @@ export class PairingPage {
     this.bookmarksService.addBookmarkFromDevice(this.device);
   }
 
-  showVendorPage() {
-    this.navCtrl.push(VendorHeatingPage, {
+  showPlayerPage() {
+    this.navCtrl.push(MjpgPlayerPage, {
       device: this.device
     });
   }

@@ -9,7 +9,7 @@ import { Platform } from 'ionic-angular';
 import { NabtoService } from '../../app/nabto.service';
 import { NabtoDevice } from '../../app/device.class';
 import { Bookmark, BookmarksService } from '../../app/bookmarks.service';
-import { VendorHeatingPage } from '../vendor-heating/vendor-heating';
+import { MjpgPlayerPage } from '../mjpg-player/mjpg-player';
 
 @Component({
   selector: 'page-discover',
@@ -115,7 +115,7 @@ export class DiscoverPage {
     toast.present();
     // if the user has deleted bookmark, add again
     this.bookmarksService.addBookmarkFromDevice(device);
-    this.navCtrl.push(VendorHeatingPage, { // XXX don't depend directly on vendor page here
+    this.navCtrl.push(MjpgPlayerPage, { 
       device: device
     });
   }

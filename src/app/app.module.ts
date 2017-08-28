@@ -8,7 +8,7 @@ import { ProfileService } from './profile.service';
 import { DiscoverPage } from '../pages/discover/discover';
 import { PairingPage } from '../pages/pairing/pairing';
 import { OverviewPage } from '../pages/overview/overview';
-import { VendorHeatingPage } from '../pages/vendor-heating/vendor-heating';
+import { MjpgPlayerPage } from '../pages/mjpg-player/mjpg-player';
 import { ProfilePage } from '../pages/profile/profile';
 import { ClientSettingsPage } from '../pages/client-settings/client-settings';
 import { DeviceSettingsPage } from '../pages/device-settings/device-settings';
@@ -26,7 +26,7 @@ import { HttpModule } from '@angular/http';
     DiscoverPage,
     PairingPage,
     OverviewPage,
-    VendorHeatingPage,
+    MjpgPlayerPage,
     ProfilePage,
     ClientSettingsPage,
     DeviceSettingsPage,
@@ -46,7 +46,7 @@ import { HttpModule } from '@angular/http';
     DiscoverPage,
     PairingPage,
     OverviewPage,
-    VendorHeatingPage,
+    MjpgPlayerPage,
     ProfilePage,
     ClientSettingsPage,
     DeviceSettingsPage,
