@@ -83,7 +83,7 @@ export class NabtoDevice {
     if (iconUrl) {
       this.iconUrl = iconUrl;
     } else {
-      this.iconUrl = 'img/chip.png';
+      this.iconUrl = 'assets/img/chip.png';
     }
     this.openForPairing = openForPairing;
     this.currentUserIsPaired = currentUserIsPaired;

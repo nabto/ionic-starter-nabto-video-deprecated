@@ -11,9 +11,9 @@
 
 <ion-content padding>
 
-  <ion-card [hidden]="!empty">
+  <ion-card [hidden]="!(devices | async)?.length == 0">
     <ion-card-header>
-      No devices found
+      No video devices found
     </ion-card-header>
     <ion-card-content>
       Make sure you are on the same local area network as the device you try to discover and that the device is powered on. 

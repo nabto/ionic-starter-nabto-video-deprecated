@@ -192,7 +192,7 @@ export class NabtoService {
   // assumes nabto is available and started
   private injectInterfaceDefinition(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.http.get("nabto/unabto_queries.xml")
+      this.http.get("assets/nabto/unabto_queries.xml")
         .toPromise()
         .then((res: Response) => {
           nabto.rpcSetDefaultInterface(res.text(), (err: any) => {
@@ -261,8 +261,10 @@ export class NabtoService {
     for (let bookmark of bookmarks) {
       this.getPublicDetails(bookmark.id)
         .then((device: NabtoDevice) => {
-          devices.push(device);
-          deviceInfoSource.next(devices);
+          if (device.product.toLowerCase().indexOf("video") > 0) {
+            devices.push(device);
+            deviceInfoSource.next(devices);
+          }
         })
         .catch((error) => {
           // device unavailable, use cached information from bookmark
