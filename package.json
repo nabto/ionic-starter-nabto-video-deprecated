@@ -62,12 +62,11 @@
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-device-name": {},
-            "cordova-plugin-nabto": {},
             "cordova-plugin-whitelist": {},
-            "cordova-sqlite-storage": {}
+            "cordova-sqlite-storage": {},
+            "cordova-plugin-nabto": {}
         },
         "platforms": [
-            "android",
             "ios"
         ]
     }

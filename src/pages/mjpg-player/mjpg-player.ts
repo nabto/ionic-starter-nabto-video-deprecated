@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
 import { NabtoDevice } from '../../app/device.class';
 import { NabtoService } from '../../app/nabto.service';
 import { DeviceSettingsPage } from '../device-settings/device-settings';
@@ -16,99 +14,37 @@ declare var NabtoError;
 export class MjpgPlayerPage {
   
   device: NabtoDevice;
-  busy: boolean;
-  activated: boolean;
-  offline: boolean;
-  temperature: number;
-  mode: string;
-  roomTemperature: number;
-  maxTemp: number;
-  minTemp: number;
   timer: any;
   spinner: any;
-  unavailableStatus: string;
-  firstView: boolean = true;
   url: string;
+  tunnel: string;
 
   constructor(private navCtrl: NavController,
               private nabtoService: NabtoService,
               private toastCtrl: ToastController,
-              private loadingCtrl: LoadingController,
-              private navParams: NavParams,
-              private modalCtrl: ModalController) {
+              private navParams: NavParams) {
     this.device = navParams.get('device');
-    this.temperature = undefined;
-    this.activated = false;
-    this.offline = true;
-    this.mode = undefined;
-    this.maxTemp = 30;
-    this.minTemp = 16;
     this.timer = undefined;
-    this.busy = false;
+    this.url = "assets/img/spinner.gif";
   }
 
-  isOffline() {
-    return this.offline;
-  }
-  
-  ionViewDidLoad() {
-    this.refresh();
-  }
-  
   ionViewDidEnter() {
-    if (!this.firstView) {
-      this.refresh();
-    } else {
-      // first time we enter the page, just show the values populated
-      // during load (to not invoke device again a few milliseconds
-      // after load)
-      this.firstView = false;
-    }
+    this.showStream();
   }
 
-  refresh() {
-    this.busyBegin();
-    // open tunnel
+  ionViewWillLeave() {
+    this.nabtoService.closeTunnel(this.tunnel);
+  }
+
+  showStream() {
     this.nabtoService.openTunnel(this.device.id, 8081)
       .then((res: any) => {
-        console.log(" *** tunnel connected, portnum is " + res.localPort + ", state is " + res.state);
+        console.log(" *** tunnel ${tunnelId} connected, portnum is " + res.localPort + ", state is " + res.state);
+        this.tunnel = res.tunnelId;
         this.url = `http://127.0.0.1:${res.localPort}/`;
-        this.offline = false;
-        this.busyEnd();
       }).catch(error => {
-        this.busyEnd();
-        this.handleError(error);
+        this.showToast(error.message);
       });
-  }
-
-  busyBegin() {
-    if (!this.busy) {
-      this.busy = true;
-      this.timer = setTimeout(() => this.showSpinner(), 500);
-    }
-  }
-
-  busyEnd() {
-    this.busy = false;
-    if (this.timer) {
-      clearTimeout(this.timer);
-      this.timer = undefined;
-    }
-    if (this.spinner) {
-      this.spinner.dismiss();
-      this.spinner = undefined;
-    }
-  }
-  
-  handleError(error: any) {
-    console.log(`Handling error: ${error.code}`);
-    if (error.code == NabtoError.Code.API_RPC_DEVICE_OFFLINE) {
-      this.unavailableStatus = "Device offline";
-      this.offline = true;
-    } else {
-      console.log("ERROR invoking device: " + JSON.stringify(error));
-    }
-    this.showToast(error.message);
   }
 
   showToast(message: string) {
@@ -122,13 +58,6 @@ export class MjpgPlayerPage {
     toast.present();
   }
   
-  showSpinner() {
-    this.spinner = this.loadingCtrl.create({
-      content: "Invoking device...",
-    });
-    this.spinner.present();
-  }
-
   showSettingsPage() {
     this.navCtrl.push(DeviceSettingsPage, {
       device: this.device

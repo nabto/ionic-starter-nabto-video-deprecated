@@ -508,6 +508,7 @@ export class NabtoService {
                   nabto.tunnelPort(tunnel, (err, port) => {
                   if (!err) {
                     return resolve({
+                      tunnelId: tunnel,
                       localPort: port,
                       state: state
                     });
@@ -528,6 +529,18 @@ export class NabtoService {
         });
       } catch (err) {
         console.log("Caught error: " + err);
+        reject(err);
+      }
+    });
+  }
+
+  public closeTunnel(tunnel: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      try {
+        nabto.tunnelClose(tunnel, (err) => {
+          resolve(true);
+        });
+      } catch (err) {
         reject(err);
       }
     });
