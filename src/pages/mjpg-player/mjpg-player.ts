@@ -33,13 +33,19 @@ export class MjpgPlayerPage {
   }
 
   ionViewWillLeave() {
-    this.nabtoService.closeTunnel(this.tunnel);
+    this.nabtoService.closeTunnel(this.tunnel)
+      .then(() => {
+        console.log(`Tunnel ${this.tunnel} closed`);
+      })
+      .catch(() => {
+        console.log(`Error: Tunnel ${this.tunnel} could not be closed`);
+      });
   }
 
   showStream() {
     this.nabtoService.openTunnel(this.device.id, 8081)
       .then((res: any) => {
-        console.log(" *** tunnel ${tunnelId} connected, portnum is " + res.localPort + ", state is " + res.state);
+        console.log(`Tunnel ${res.tunnelId} connected, portnum is ${res.localPort}, state is ${res.state}`);
         this.tunnel = res.tunnelId;
         this.url = `http://127.0.0.1:${res.localPort}/`;
       }).catch(error => {

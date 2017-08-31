@@ -550,7 +550,7 @@ export class NabtoService {
     return new Promise((resolve, reject) => {
       this.startup().then(() => {
         // startup only resolves if nabto is ready and nabtoStartup() succeeds
-        nabto.version((err,res) => {
+        nabto.versionString((err,res) => {
           if (!err) {
             resolve(res);
           } else {
