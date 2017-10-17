@@ -1,3 +1,7 @@
+# Note: Repository changed!
+
+We have changed the video app repository to be a fork of the [general starter app](https://github.com/nabto/ionic-starter-nabto) to make it simpler to manage specific derived apps. Please clone [the new video repo](https://github.com/nabto/ionic-starter-nabto-video) again - or if you for some reason want to stick with the old repo, [change the remote's URL](https://help.github.com/articles/changing-a-remote-s-url/) to `https://github.com/nabto/ionic-starter-nabto-video-deprecated`.
+
 # Ionic Starter for Nabto IoT / AppMyProduct Video Apps
 
 This [Ionic](http://ionicframework.com) Starter demonstrates how to use [AppMyProduct](https://www.appmyproduct.com) for building a video player app. It contains everything to build a production ready IoT app to remote control your own product:
